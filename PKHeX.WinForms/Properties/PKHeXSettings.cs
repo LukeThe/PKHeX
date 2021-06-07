@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using Newtonsoft.Json;
 using PKHeX.Core;
@@ -24,6 +25,7 @@ namespace PKHeX.WinForms
         public DisplaySettings Display { get; set; } = new();
         public SoundSettings Sounds { get; set; } = new();
         public HoverSettings Hover { get; set; } = new();
+        public DarkModeSettings DarkMode { get; set; } = new();
 
         // GUI Specific
         public DrawConfig Draw { get; set; } = new();
@@ -318,5 +320,18 @@ namespace PKHeX.WinForms
 
         [LocalizedDescription("Hide Secret Details in Editors")]
         public bool HideSecretDetails { get; set; }
+    }
+
+    [Serializable]
+    public sealed class DarkModeSettings
+    {
+        [LocalizedDescription("Value of Background's color in dark mode.")]
+        public Color BackColor { get; set; } = Color.DarkBlue;
+
+        [LocalizedDescription("Value of Font's color in dark mode.")]
+        public Color ForeColor { get; set; } = Color.White;
+
+        [LocalizedDescription("WinForms's Dark Mode boolean")]
+        public bool FlagDarkMode { get; set; } = false;
     }
 }

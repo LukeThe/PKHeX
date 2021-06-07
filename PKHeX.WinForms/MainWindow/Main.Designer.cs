@@ -67,6 +67,8 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.dragout = new System.Windows.Forms.PictureBox();
             this.PB_Legal = new System.Windows.Forms.PictureBox();
+            this.Menu_Themes = new System.Windows.Forms.ToolStripMenuItem();
+            this.CB_MainThemes = new System.Windows.Forms.ToolStripComboBox();
             this.PKME_Tabs = new PKHeX.WinForms.Controls.PKMEditor();
             this.C_SAV = new PKHeX.WinForms.Controls.SAVEditor();
             this.menuStrip1.SuspendLayout();
@@ -333,6 +335,7 @@
             this.Menu_Undo,
             this.Menu_Redo,
             this.Menu_Settings,
+            this.Menu_Themes,
             this.Menu_About});
             this.Menu_Options.Name = "Menu_Options";
             this.Menu_Options.Size = new System.Drawing.Size(61, 20);
@@ -474,6 +477,24 @@
             this.PB_Legal.TabStop = false;
             this.PB_Legal.Click += new System.EventHandler(this.ClickLegality);
             // 
+            // Menu_Themes
+            // 
+            this.Menu_Themes.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CB_MainThemes});
+            this.Menu_Themes.Image = global::PKHeX.WinForms.Properties.Resources.dark_mode;
+            this.Menu_Themes.Name = "Menu_Themes";
+            this.Menu_Themes.Size = new System.Drawing.Size(180, 22);
+            this.Menu_Themes.Text = "Themes";
+            // 
+            // CB_MainThemes
+            // 
+            this.CB_MainThemes.Items.AddRange(new object[] {
+            "LightMode",
+            "DarkMode"});
+            this.CB_MainThemes.Name = "CB_MainThemes";
+            this.CB_MainThemes.Size = new System.Drawing.Size(121, 23);
+            this.CB_MainThemes.SelectedIndexChanged += new System.EventHandler(this.CB_MainThemesChanged);
+            // 
             // PKME_Tabs
             // 
             this.PKME_Tabs.ChangingFields = false;
@@ -581,6 +602,8 @@
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.PictureBox dragout;
         private System.Windows.Forms.PictureBox PB_Legal;
+        private System.Windows.Forms.ToolStripMenuItem Menu_Themes;
+        private System.Windows.Forms.ToolStripComboBox CB_MainThemes;
     }
 }
 

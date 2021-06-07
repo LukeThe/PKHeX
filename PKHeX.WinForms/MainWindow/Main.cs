@@ -281,6 +281,7 @@ namespace PKHeX.WinForms
             Draw = C_SAV.M.Hover.Draw = PKME_Tabs.Draw = settings.Draw;
             ReloadProgramSettings(settings);
             CB_MainLanguage.Items.AddRange(main_langlist);
+            CB_MainThemes.SelectedIndex = 0;
             PB_Legal.Visible = !HaX;
             PKMConverter.AllowIncompatibleConversion = C_SAV.HaX = PKME_Tabs.HaX = HaX;
             WinFormsUtil.DetectSaveFileOnFileOpen = settings.Startup.TryDetectRecentSave;
@@ -1069,6 +1070,87 @@ namespace PKHeX.WinForms
             pb.Image = pk.Sprite(C_SAV.SAV, -1, -1, flagIllegal: false);
             if (pb.BackColor == Color.Red)
                 pb.BackColor = Color.Transparent;
+        }
+
+        public class CustomColorTable : ProfessionalColorTable
+        {
+            public override Color ToolStripBorder
+            {
+                get { return Color.DarkBlue; }
+            }
+            public override Color ToolStripDropDownBackground
+            {
+                get { return Color.MediumBlue; }
+            }
+
+            public override Color MenuItemSelected
+            {
+                get { return Color.RoyalBlue; }
+            }
+
+            public override Color MenuItemPressedGradientBegin
+            { get { return Color.DarkBlue; } }
+            public override Color MenuItemPressedGradientMiddle
+            { get { return Color.MediumBlue; } }
+
+            public override Color MenuItemPressedGradientEnd
+            { get { return Color.MediumBlue; } }
+
+            public override Color ImageMarginGradientEnd
+            { get { return Color.MediumBlue; } }
+            public override Color ImageMarginGradientMiddle
+            { get { return Color.MediumBlue; } }
+
+            public override Color ImageMarginGradientBegin
+            { get { return Color.MediumBlue; } }
+
+            public override Color MenuBorder
+            { get { return Color.DarkGray; } }
+
+            public override Color StatusStripGradientBegin
+            { get { return Color.White; } }
+
+            public override Color StatusStripGradientEnd
+            { get { return Color.White; } }
+
+        }
+
+        public class MyRenderer : ToolStripProfessionalRenderer
+        {
+
+            public MyRenderer()
+                : base(new CustomColorTable()) { }
+
+
+            protected override void OnRenderItemText(ToolStripItemTextRenderEventArgs e)
+            {
+
+                e.Item.ForeColor = Color.White;
+                base.OnRenderItemText(e);
+
+            }
+        }
+     
+        private void CB_MainThemesChanged(object sender, EventArgs e)
+        {
+            if (CB_MainThemes.SelectedIndex != 0)
+            {
+                this.BackColor = Color.DarkBlue;
+                Settings.DarkMode.FlagDarkMode = true;
+                menuStrip1.RenderMode = ToolStripRenderMode.System;
+                menuStrip1.Renderer = new MyRenderer();
+                Menu_Options.HideDropDown();
+                CB_MainLanguage.BackColor = Color.DimGray;
+                CB_MainLanguage.ForeColor = Color.White;
+                CB_MainThemes.BackColor = Color.DimGray;
+                CB_MainThemes.ForeColor = Color.White;
+                return;
+
+            }
+
+            this.BackColor = Color.White;
+            menuStrip1.ForeColor = Color.Black;
+            Settings.DarkMode.FlagDarkMode = false;
         }
 
         private void PKME_Tabs_UpdatePreviewSprite(object sender, EventArgs e) => GetPreview(dragout);
